@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class EmployeController {
 
@@ -25,21 +25,17 @@ public class EmployeController {
 
 
     @RequestMapping(value = "/employe", method = RequestMethod.GET)
-    public Employe employe(@RequestParam Long idEmploye) {
-        return service.employe(idEmploye);
+    public Employe employe(@RequestParam Long idEmployee) {
+        return service.employe(idEmployee);
     }
 
 
-    @RequestMapping(value = "/creer-employe", method = RequestMethod.POST)
-    public ResponseEntity<?> handleOptions() {
-        return ResponseEntity.ok().build();
+
+
+    @PostMapping("/creer_employe")
+    public Employe creeEmploye(@RequestBody Employe employe) throws Exception {
+        return service.creerEmploye(employe);
     }
-
-
-    //@PostMapping("/creer-employe")
-    //public Employe creeEmploye(@RequestBody Employe employe) throws Exception {
-      //  return service.creerEmploye(employe);
-   // }
 
     @PutMapping("/modifier-employe")
     public Employe modifierEmploye(@RequestBody Employe employe ) {
@@ -50,6 +46,12 @@ public class EmployeController {
     public ResponseEntity<Map<String, Boolean>> supprimerEmploye(@RequestParam Long idEmploye) {
         return service.supprimerEmploye(idEmploye);
     }
+
+
+
+
+
+
 
 
 

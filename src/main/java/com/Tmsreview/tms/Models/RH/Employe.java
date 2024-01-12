@@ -3,6 +3,7 @@ package com.Tmsreview.tms.Models.RH;
 
 
 import javax.persistence.*;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -18,8 +19,8 @@ public class Employe {
     @Column(name = "typeIdentite")
     String typeIdentite;
 
-    @Column(name = "numIdentite")
-    String nCin;
+    @Column(name = "numIdentite",unique = true)
+    String numIdentite;
 
     @Column(name = "datePieceIdentite")
     Date datePieceIdentite;
@@ -72,8 +73,6 @@ public class Employe {
     @Column(name = "numImmatriculationSociale")
      String numImmatriculationSociale ;
 
-    @Lob
-    private byte[] imageE;
 
     @Column(name = "description ")
      String description  ;
@@ -87,9 +86,9 @@ public class Employe {
 
     public Employe (){}
 
-    public Employe(String typeIdentite, String nCin, Date datePieceIdentite, String nationalite, String nom, String prenom, String tel, String adress, Date dateNaissance, String image, String ville, String banque, String permis, String categoriePermis, Date dateExpirationPermis, String situationFamiliale, int enfantCharge, String cnss, String numImmatriculationSociale, byte[] imageE, String description, String rib, String posteEmploye) {
+    public Employe(String typeIdentite, String numIdentite, Date datePieceIdentite, String nationalite, String nom, String prenom, String tel, String adress, Date dateNaissance,String image, String ville, String banque, String permis, String categoriePermis, Date dateExpirationPermis, String situationFamiliale, int enfantCharge, String cnss, String numImmatriculationSociale,  String description, String rib, String posteEmploye) {
         this.typeIdentite = typeIdentite;
-        this.nCin = nCin;
+        this.numIdentite = numIdentite;
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(datePieceIdentite);
@@ -106,7 +105,7 @@ public class Employe {
         cal.add(Calendar.DATE, 1);
         this.dateNaissance = cal.getTime();
 
-        this.image = image;
+
         this.ville = ville;
         this.banque = banque;
         this.permis = permis;
@@ -120,11 +119,14 @@ public class Employe {
         this.enfantCharge = enfantCharge;
         this.cnss = cnss;
         this.numImmatriculationSociale = numImmatriculationSociale;
-        this.imageE = imageE;
+
         this.description = description;
         this.rib = rib;
         this.posteEmploye = posteEmploye;
     }
+
+
+
 
     public Long getIdEmployee() {
         return idEmployee;
@@ -142,12 +144,12 @@ public class Employe {
         this.typeIdentite = typeIdentite;
     }
 
-    public String getnCin() {
-        return nCin;
+    public String getNumIdentite() {
+        return numIdentite;
     }
 
-    public void setnCin(String nCin) {
-        this.nCin = nCin;
+    public void setNumIdentite(String numIdentite) {
+        this.numIdentite = numIdentite;
     }
 
     public Date getDatePieceIdentite() {
@@ -286,13 +288,6 @@ public class Employe {
         this.numImmatriculationSociale = numImmatriculationSociale;
     }
 
-    public byte[] getImageE() {
-        return imageE;
-    }
-
-    public void setImageE(byte[] imageE) {
-        this.imageE = imageE;
-    }
 
     public String getDescription() {
         return description;
@@ -317,4 +312,8 @@ public class Employe {
     public void setPosteEmploye(String posteEmploye) {
         this.posteEmploye = posteEmploye;
     }
+
+
+
+
 }
